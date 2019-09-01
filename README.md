@@ -10,4 +10,4 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 ```
 
 Database Script:
-[View](script.sql)
+[View](resources/script.sql)
