@@ -9,5 +9,4 @@ spring.datasource.password=root
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 ```
 
-Database Script:
-[View](resources/script.sql)
+Database Script: [View](resources/script.sql)
