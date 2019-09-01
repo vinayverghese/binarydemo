@@ -15,5 +15,4 @@ import java.time.LocalDateTime;
 public class EnqueueRequest {
     private String enqueueType;
     private String enqueueSize;
-
 }

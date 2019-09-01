@@ -1,4 +1,4 @@
-package com.binary.aircraft.demo;
+package com.binary.aircraft;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

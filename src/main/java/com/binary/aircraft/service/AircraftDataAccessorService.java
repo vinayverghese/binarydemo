@@ -8,11 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 @Service
+@Transactional
 public class AircraftDataAccessorService {
 
     @Autowired
@@ -20,7 +22,11 @@ public class AircraftDataAccessorService {
 
     public void save(List<AircraftModel> aircraftModelList)
     {
-        aircraftRepository.save(aircraftModelList);
+        aircraftRepository.saveAll(aircraftModelList);
+
+    }
+    public List<AircraftModel> allAircrafts()
+    {
+        return aircraftRepository.findAll();
     }
 }
-

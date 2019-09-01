@@ -1,37 +1,65 @@
 package com.binary.aircraft.service;
 
 import com.binary.aircraft.model.AircraftModel;
+import com.binary.aircraft.repository.AircraftRepository;
 import com.binary.aircraft.request.EnqueueRequest;
+import com.binary.aircraft.request.ListQueueRequest;
+import com.binary.aircraft.values.QueueSize;
+import com.binary.aircraft.values.QueueType;
+import org.apache.tomcat.jni.Local;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Service
 public class AircraftService {
 
+    @Autowired
+    private AircraftDataAccessorService aircraftDataAccessorService;
 
-    public ResponseEntity<String> enqueueAircraft(List<EnqueueRequest> enqueueRequestList)
+    public ResponseEntity<String> enqueueAircraft(List<EnqueueRequest> enqueueRequestList) {
+
+        if (enqueueRequestList != null && !enqueueRequestList.isEmpty()) {
+
+            Integer size = enqueueRequestList.size();
+
+            boolean isValidSizeAndType = enqueueRequestList.stream().allMatch(e ->QueueSize.contains(e.getEnqueueSize())
+                    &&  QueueType.contains(e.getEnqueueType()));
+
+            System.out.println("isValidSizeAndType : " + isValidSizeAndType);
+
+            if (isValidSizeAndType) {
+                List<AircraftModel> aircraftModelList = new ArrayList<>();
+                for (EnqueueRequest e : enqueueRequestList) {
+
+                    AircraftModel aircraftModel = new AircraftModel();
+                    aircraftModel.setAircraftType(QueueType.getNameByAbbr(e.getEnqueueType()));
+                    aircraftModel.setAircraftSize(QueueSize.getNameByAbbr(e.getEnqueueSize()));
+                    aircraftModel.setAircraftStatus("A");
+                    aircraftModelList.add(aircraftModel);
+                }
+                aircraftDataAccessorService.save(aircraftModelList);
+            }
+            else
+            {
+                return new ResponseEntity<>("Wrong input", HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(size + " ACs added to Queue", HttpStatus.CREATED);
+
+        } else {
+            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public ResponseEntity<List<AircraftModel>> listAircraftQueue(ListQueueRequest queueRequestList)
     {
-
-        if(enqueueRequestList!=null && !enqueueRequestList.isEmpty())
-        {
-
-            Queue<AircraftModel> q = new LinkedList<>();
-
-            // Adds elements {0, 1, 2, 3, 4} to queue
-            for (int i=0; i<5; i++)
-                q.add(i);
-        }
-        else
-        {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-
-
+            System.out.println("2nd");
+            return new ResponseEntity<List<AircraftModel>>(aircraftDataAccessorService.allAircrafts(), HttpStatus.OK);
 
     }
 }
