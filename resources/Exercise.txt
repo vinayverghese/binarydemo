@@ -1,5 +1,6 @@
 
-The goal of this exercise is to demonstrate programming ability by developing a simple software subsystem. Work can be done in any language. 
+The goal of this exercise is to demonstrate programming ability by developing a simple software subsystem. 
+Work can be done in any language. 
 
 A software subsystem of an air-traffic control system is defined to manage a queue of aircraft (AC) in an airport.  The aircraft queue is managed by a process that responds to three types of requests: 
 1.	System boot used to start the system.
