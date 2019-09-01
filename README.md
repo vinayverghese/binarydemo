@@ -1,5 +1,7 @@
 # Aircraft Queue Management System
 
+Problem Statement : [View](/resources/Exercise.txt)
+
 Database Details:
 
 ```
@@ -10,3 +12,6 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 ```
 
 Database Script: [View](resources/script.sql)
+
+
+
