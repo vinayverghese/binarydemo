@@ -24,7 +24,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
    
   **_Request:_** `PUT http://localhost:9091/binary/updatequeue`
    
-   **Body**
+   **_Body_**
    
     {
         "enqueueType": "E",
@@ -36,17 +36,17 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
    
    To view ACs in Queue, pass without parameter
    
-   **_Request:_** `PUT http://localhost:9091/binary/dequeue`
+   **_Request_** `PUT http://localhost:9091/binary/dequeue`
     
    To dequeue ACs based on precedence, pass number of ACs (number=1,2,..) to be dequeued as path parameter
    
-   **_Request:_** `PUT http://localhost:9091/binary/dequeue/{number}`
+   **_Request_** `PUT http://localhost:9091/binary/dequeue/{number}`
  
-   **State of Queue**
+   **State of Queue:**
    
    To view state of queue, based on following parameters:
    aircraftId (Id of AC in Queue)
    queueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
    queueSize = L (Large), S (Small)
    
-   **Request:** `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
+   **_Request_** `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
