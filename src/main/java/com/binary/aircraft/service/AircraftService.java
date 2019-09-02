@@ -1,20 +1,17 @@
 package com.binary.aircraft.service;
 
 import com.binary.aircraft.model.AircraftModel;
-import com.binary.aircraft.repository.AircraftRepository;
 import com.binary.aircraft.request.EnqueueRequest;
-import com.binary.aircraft.request.ListQueueRequest;
+import com.binary.aircraft.request.QueueRequest;
 import com.binary.aircraft.values.QueueSize;
 import com.binary.aircraft.values.QueueType;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Stream;
 
 @Service
 public class AircraftService {
@@ -28,8 +25,8 @@ public class AircraftService {
 
             Integer size = enqueueRequestList.size();
 
-            boolean isValidSizeAndType = enqueueRequestList.stream().allMatch(e ->QueueSize.contains(e.getEnqueueSize())
-                    &&  QueueType.contains(e.getEnqueueType()));
+            boolean isValidSizeAndType = enqueueRequestList.stream().allMatch(e -> QueueSize.contains(e.getEnqueueSize())
+                    && QueueType.contains(e.getEnqueueType()));
 
             System.out.println("isValidSizeAndType : " + isValidSizeAndType);
 
@@ -44,9 +41,7 @@ public class AircraftService {
                     aircraftModelList.add(aircraftModel);
                 }
                 aircraftDataAccessorService.save(aircraftModelList);
-            }
-            else
-            {
+            } else {
                 return new ResponseEntity<>("Wrong input", HttpStatus.BAD_REQUEST);
             }
             return new ResponseEntity<>(size + " ACs added to Queue", HttpStatus.CREATED);
@@ -56,10 +51,13 @@ public class AircraftService {
         }
     }
 
-    public ResponseEntity<List<AircraftModel>> listAircraftQueue(ListQueueRequest queueRequestList)
-    {
-            System.out.println("2nd");
-            return new ResponseEntity<List<AircraftModel>>(aircraftDataAccessorService.allAircrafts(), HttpStatus.OK);
+    public ResponseEntity<List<AircraftModel>> listAircraftQueue(QueueRequest queueRequest) {
+        if (queueRequest != null) {
+            return new ResponseEntity<List<AircraftModel>>(aircraftDataAccessorService.findAircraftsByAircraftIdOrQueueTypeOrQueueSize(queueRequest), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<AircraftModel>>(aircraftDataAccessorService.findAllAircraftsInQueue(), HttpStatus.OK);
+
+        }
 
     }
 }

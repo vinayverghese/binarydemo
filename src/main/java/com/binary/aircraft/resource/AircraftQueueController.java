@@ -1,10 +1,8 @@
 package com.binary.aircraft.resource;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.binary.aircraft.model.AircraftModel;
-import com.binary.aircraft.request.ListQueueRequest;
-import org.springframework.http.MediaType;
+import com.binary.aircraft.request.QueueRequest;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -27,7 +25,7 @@ public class AircraftQueueController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<AircraftModel>> listAircraftQueue(ListQueueRequest queueRequestList) {
+    public ResponseEntity<List<AircraftModel>> listAircraftQueue(QueueRequest queueRequestList) {
         return  aircraftService.listAircraftQueue(queueRequestList);
     }
 }

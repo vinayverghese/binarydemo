@@ -1,5 +1,7 @@
 package com.binary.aircraft.values;
 
+import org.apache.commons.lang.StringUtils;
+
 public enum QueueSize {
 
     LARGE("Large", "L", 0), SMALL("Small","S", 1);
@@ -14,9 +16,10 @@ public enum QueueSize {
     }
 
     public static String getNameByAbbr(String abbr){
-        for(QueueSize q : QueueSize.values()){
-            System.out.println("abbr: " +abbr + " q: "+q + " getAbbr : " +q.getAbbr());
-            if(abbr.equals(q.getAbbr())) return q.name();
+        if(StringUtils.isNotBlank(abbr)) {
+            for (QueueSize q : QueueSize.values()) {
+                if (abbr.equals(q.getAbbr())) return q.name();
+            }
         }
         return null;
     }

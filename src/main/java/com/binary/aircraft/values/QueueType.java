@@ -1,9 +1,11 @@
 package com.binary.aircraft.values;
 
+import org.apache.commons.lang.StringUtils;
+
 public enum QueueType {
 
     EMERGENCY("Emergency", "E", 0), VIP("VIP", "V",1),
-    PASSENGER("Passenger", "P", 2), C("Cargo", "C", 3);
+    PASSENGER("Passenger", "P", 2), CARGO("Cargo", "C", 3);
 
     public static boolean contains(String s)
     {
@@ -14,8 +16,10 @@ public enum QueueType {
     }
 
     public static String getNameByAbbr(String abbr){
-        for(QueueType q : QueueType.values()){
-            if(abbr.equals(q.getAbbr())) return q.name();
+        if(StringUtils.isNotBlank(abbr)) {
+            for (QueueType q : QueueType.values()) {
+                if (abbr.equals(q.getAbbr())) return q.name();
+            }
         }
         return null;
     }
