@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "7b832a75-b6e7-4428-914d-1e30a993790d",
+		"name": "binary demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Enqueue",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"enqueueType\": \"E\",\n        \"enqueueSize\": \"L\"\n    },\n    {\n        \"enqueueType\": \"V\",\n        \"enqueueSize\": \"S\"\n    }\n]"
+				},
+				"url": {
+					"raw": "http://localhost:9091/binary/enqueue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"binary",
+						"enqueue"
+					]
+				},
+				"description": "http://localhost:9091/aircract/enqueue"
+			},
+			"response": []
+		},
+		{
+			"name": "Enqueue Or Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"enqueueType\": \"E\",\n    \"enqueueSize\": \"S\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9091/binary/updatequeue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"binary",
+						"updatequeue"
+					]
+				},
+				"description": "http://localhost:9091/aircract/enqueue"
+			},
+			"response": []
+		},
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:9091/binary/list?type=V&size=L&id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"binary",
+						"list"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "V"
+						},
+						{
+							"key": "size",
+							"value": "L"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "http://localhost:9091/aircract/enqueue"
+			},
+			"response": []
+		}
+	]
+}
