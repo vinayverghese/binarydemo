@@ -18,7 +18,16 @@ public enum QueueType {
     public static String getNameByAbbr(String abbr){
         if(StringUtils.isNotBlank(abbr)) {
             for (QueueType q : QueueType.values()) {
-                if (abbr.equals(q.getAbbr())) return q.name();
+                if (abbr.equals(q.getAbbr())) return q.getAbbr();
+            }
+        }
+        return null;
+    }
+
+    public static Integer getPriorityByName(String name){
+        if(StringUtils.isNotBlank(name)) {
+            for (QueueType q : QueueType.values()) {
+                if (name.equals(q.getName().toUpperCase())) return q.getPriority();
             }
         }
         return null;

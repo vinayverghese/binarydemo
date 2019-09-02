@@ -1,6 +1,9 @@
 package com.binary.aircraft.service;
 
+import com.binary.aircraft.comparator.QueueSizeComparator;
+import com.binary.aircraft.comparator.QueueTimeComparator;
 import com.binary.aircraft.model.AircraftModel;
+import com.binary.aircraft.comparator.QueueComparator;
 import com.binary.aircraft.request.EnqueueRequest;
 import com.binary.aircraft.request.QueueRequest;
 import com.binary.aircraft.values.QueueSize;
@@ -9,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -72,7 +74,7 @@ public class AircraftService {
             Integer position = enqueueRequest.getPosition();
             AircraftModel updateOldAircraftModel = aircraftDataAccessorService.findAircraftsByPosition(enqueueRequest);
             if (updateOldAircraftModel != null) {
-                updateOldAircraftModel.setAircraftPosition(updateOldAircraftModel.getAircraftPosition()+1);
+                updateOldAircraftModel.setAircraftPosition(updateOldAircraftModel.getAircraftPosition() + 1);
 
                 AircraftModel addNewAircraftModel = new AircraftModel();
                 addNewAircraftModel.setAircraftType(QueueType.getNameByAbbr(enqueueRequest.getEnqueueType()));
@@ -81,9 +83,7 @@ public class AircraftService {
                 addNewAircraftModel.setAircraftStatus("A");
                 updatedAircraftModelList.add(updateOldAircraftModel);
                 updatedAircraftModelList.add(addNewAircraftModel);
-            }
-            else
-            {
+            } else {
 
                 return new ResponseEntity<>("Position Invalid", HttpStatus.BAD_REQUEST);
             }
@@ -106,5 +106,32 @@ public class AircraftService {
 
 
     }
-}
 
+
+    public ResponseEntity<List<AircraftModel>> deqeueAircraft(Optional<String> id) {
+
+        if (!id.isPresent()) {
+            return new ResponseEntity<List<AircraftModel>>(aircraftDataAccessorService.findAllAircraftsInQueue(), HttpStatus.OK);
+        } else {
+            System.out.println("Id passed :" + id);
+            List<AircraftModel> aircraftModelList = aircraftDataAccessorService.findAllAircraftsInQueue();
+
+
+            QueueComparator queueComparator = new QueueComparator();
+            QueueSizeComparator queueSizeComparator = new QueueSizeComparator();
+            QueueTimeComparator queueTimeComparator = new QueueTimeComparator();
+
+            Collections.sort(aircraftModelList, queueComparator);
+            //    Collections.sort(aircraftModelList, queueSizeComparator);
+            //Collections.sort(aircraftModelList, queueTimeComparator);
+
+            for (AircraftModel aircraftModel : aircraftModelList)
+
+                System.out.println(aircraftModel.getAircraftType() + "     " +
+                        aircraftModel.getAircraftSize() + "    " + aircraftModel.getCreationTime() + "    "
+                        + aircraftModel.getAircraftPosition());
+            return new ResponseEntity<List<AircraftModel>>(aircraftModelList, HttpStatus.OK);
+        }
+    }
+
+}

@@ -24,6 +24,15 @@ public enum QueueSize {
         return null;
     }
 
+    public static Integer getPriorityByName(String name){
+        if(StringUtils.isNotBlank(name)) {
+            for (QueueSize q : QueueSize.values()) {
+                if (name.equals(q.getName().toUpperCase())) return q.getPriority();
+            }
+        }
+        return null;
+    }
+
     QueueSize(String name, String abbr, Integer priority) {
         this.name = name;
         this.abbr = abbr;
