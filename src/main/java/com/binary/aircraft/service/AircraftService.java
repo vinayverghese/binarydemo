@@ -63,39 +63,47 @@ public class AircraftService {
 
     public ResponseEntity<String> updateAircraft(EnqueueRequest enqueueRequest) {
 
-        //Search for position 4, find AircraftModel(4).
-        // Update AircraftModel with enqueueRequest(5).
-        //New AircraftModel will be updated as AircraftModel(4)
-        // 1 Update(5) and 1 Insertion(4)
-
+        List<AircraftModel> updatedAircraftModelList = new ArrayList<>();
         if (enqueueRequest.getPosition() != null) {
+            //If position exists, find existing aircraft in that position
+            //Update it to new position (+1)
+            //Add new aircraft to that position
 
             Integer position = enqueueRequest.getPosition();
+            AircraftModel updateOldAircraftModel = aircraftDataAccessorService.findAircraftsByPosition(enqueueRequest);
+            if (updateOldAircraftModel != null) {
+                updateOldAircraftModel.setAircraftPosition(updateOldAircraftModel.getAircraftPosition()+1);
 
+                AircraftModel addNewAircraftModel = new AircraftModel();
+                addNewAircraftModel.setAircraftType(QueueType.getNameByAbbr(enqueueRequest.getEnqueueType()));
+                addNewAircraftModel.setAircraftSize(QueueSize.getNameByAbbr(enqueueRequest.getEnqueueSize()));
+                addNewAircraftModel.setAircraftPosition(position);
+                addNewAircraftModel.setAircraftStatus("A");
+                updatedAircraftModelList.add(updateOldAircraftModel);
+                updatedAircraftModelList.add(addNewAircraftModel);
+            }
+            else
+            {
 
-            AircraftModel aircraftModel = aircraftDataAccessorService.findAircraftsByPosition(enqueueRequest);
-            AircraftModel newAircraftModel = new AircraftModel();
-            List<AircraftModel> updatedAircraftModelList = new ArrayList<>();
-
-            if (aircraftModel != null) {
-                System.out.println("Updating queue  position  (+1) : "  +position);
-                aircraftModel.setAircraftPosition(position+1);
-                updatedAircraftModelList.add(aircraftModel);
+                return new ResponseEntity<>("Position Invalid", HttpStatus.BAD_REQUEST);
             }
 
+        } else {
+            //When no position is given, find the max. position in the queue and add it after that
+            AircraftModel newAircraftModel = new AircraftModel();
+            Integer maxPosition = aircraftDataAccessorService.findMaxAircraftPosition();
+            maxPosition++;
 
             newAircraftModel.setAircraftType(QueueType.getNameByAbbr(enqueueRequest.getEnqueueType()));
             newAircraftModel.setAircraftSize(QueueSize.getNameByAbbr(enqueueRequest.getEnqueueSize()));
+            newAircraftModel.setAircraftPosition(maxPosition);
             newAircraftModel.setAircraftStatus("A");
             updatedAircraftModelList.add(newAircraftModel);
-
-            aircraftDataAccessorService.save(updatedAircraftModelList);
-            return new ResponseEntity<>("Updated Aircraft Queue", HttpStatus.CREATED);
-
-
-        } else {
-            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
         }
+
+        aircraftDataAccessorService.save(updatedAircraftModelList);
+        return new ResponseEntity<>("Updated Aircraft Queue", HttpStatus.CREATED);
+
 
     }
 }

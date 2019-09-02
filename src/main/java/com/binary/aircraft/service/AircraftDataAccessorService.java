@@ -22,6 +22,7 @@ public class AircraftDataAccessorService {
     private AircraftRepository aircraftRepository;
 
     public void save(List<AircraftModel> aircraftModelList) {
+        System.out.println("Saving " +aircraftModelList.size());
         aircraftRepository.saveAll(aircraftModelList);
     }
 
@@ -43,5 +44,10 @@ public class AircraftDataAccessorService {
         return aircraftRepository.findByAircraftIdOrQueueTypeOrQueueSize(queueRequest.getAircraftId(),
                 QueueType.getNameByAbbr(queueRequest.getQueueType()),
                 QueueSize.getNameByAbbr(queueRequest.getQueueSize()));
+    }
+
+    public Integer findMaxAircraftPosition()
+    {
+        return aircraftRepository.getMaxAircraftPosition();
     }
 }

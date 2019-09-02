@@ -13,10 +13,12 @@ public interface AircraftRepository extends CrudRepository<AircraftModel, Intege
 
     public AircraftModel findByAircraftPosition(@Param("aircraftPosition") Integer aircraftPosition);
 
-    //SELECT c FROM Customer c WHERE (:name is null or c.name = :name)
     @Query("SELECT a FROM AircraftModel a WHERE (:aircraftId IS NULL OR a.aircraftId = :aircraftId) AND (:aircraftType IS NULL OR a.aircraftType = :aircraftType) AND (:aircraftSize IS NULL OR a.aircraftSize = :aircraftSize) ORDER BY aircraftPosition")
     public List<AircraftModel> findByAircraftIdOrQueueTypeOrQueueSize(
             @Param("aircraftId") Integer aircraftId,
             @Param("aircraftType") String aircraftType,
             @Param("aircraftSize") String aircraftSize);
+
+    @Query("SELECT COALESCE(MAX(a.aircraftPosition), 0) FROM AircraftModel a")
+    public Integer getMaxAircraftPosition();
 }
