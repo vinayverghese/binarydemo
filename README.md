@@ -13,7 +13,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 ```
 **API Endpoints**
 
-  **Request: **   `POST http://localhost:9091/binary/updatequeue`
+  **Request:** `POST http://localhost:9091/binary/updatequeue`
    
    **Body**
    
@@ -23,4 +23,4 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
         "position" : 9
     }
     
-   **Request: **  `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
+   **Request:** `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
