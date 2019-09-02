@@ -20,7 +20,9 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
     To add to queue, pass AC with parameters based on:
      
      enqueueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
+     
      enqueueSize = L (Large), S (Small)
+     
      position = Position in Queue
    
      **_Request_** `PUT http://localhost:9091/binary/updatequeue`
@@ -48,7 +50,9 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
       To view state of queue, based on following parameters:
       
       aircraftId (Id of AC in Queue)
+      
       queueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
+      
       queueSize = L (Large), S (Small)
 
       **_Request_** `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
