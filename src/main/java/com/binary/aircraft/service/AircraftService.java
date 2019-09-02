@@ -111,26 +111,53 @@ public class AircraftService {
     public ResponseEntity<List<AircraftModel>> deqeueAircraft(Optional<String> id) {
 
         if (!id.isPresent()) {
-            return new ResponseEntity<List<AircraftModel>>(aircraftDataAccessorService.findAllAircraftsInQueue(), HttpStatus.OK);
-        } else {
-            System.out.println("Id passed :" + id);
+
             List<AircraftModel> aircraftModelList = aircraftDataAccessorService.findAllAircraftsInQueue();
 
-
             QueueComparator queueComparator = new QueueComparator();
-            QueueSizeComparator queueSizeComparator = new QueueSizeComparator();
-            QueueTimeComparator queueTimeComparator = new QueueTimeComparator();
+            //QueueSizeComparator queueSizeComparator = new QueueSizeComparator();
+            //QueueTimeComparator queueTimeComparator = new QueueTimeComparator();
 
             Collections.sort(aircraftModelList, queueComparator);
-            //    Collections.sort(aircraftModelList, queueSizeComparator);
-            //Collections.sort(aircraftModelList, queueTimeComparator);
 
             for (AircraftModel aircraftModel : aircraftModelList)
-
                 System.out.println(aircraftModel.getAircraftType() + "     " +
                         aircraftModel.getAircraftSize() + "    " + aircraftModel.getCreationTime() + "    "
                         + aircraftModel.getAircraftPosition());
+
             return new ResponseEntity<List<AircraftModel>>(aircraftModelList, HttpStatus.OK);
+
+        } else {
+            System.out.println("Id passed :" + id);
+
+            List<AircraftModel> aircraftModelList = aircraftDataAccessorService.findAllAircraftsInQueue();
+
+            QueueComparator queueComparator = new QueueComparator();
+
+            Collections.sort(aircraftModelList, queueComparator);
+
+            for (AircraftModel aircraftModel : aircraftModelList) {
+                System.out.println(aircraftModel.getAircraftType() + "     " +
+                        aircraftModel.getAircraftSize() + "    " + aircraftModel.getCreationTime() + "    "
+                        + aircraftModel.getAircraftPosition());
+            }
+
+            //AircraftModel dequeueAircraftModel = aircraftModelList.get(0);
+            //System.out.println("\nDequeue top AC :: ");
+
+        //    System.out.println("\n " + aircraftModelList.get(0).getAircraftType() + " " + aircraftModelList.get(0).getAircraftSize() + "  " + aircraftModelList.get(0).getAircraftId() + "  " +
+          //          +aircraftModelList.get(0).getAircraftPosition());
+
+            List<AircraftModel> deleteList = new ArrayList<>();
+
+            for (int i = 0; i < Integer.valueOf(id.get()); i++) {
+                deleteList.add(aircraftModelList.get(i));
+                System.out.println("\n Deleting : " + deleteList.get(i).getAircraftType() + " " + deleteList.get(i).getAircraftSize() + "  " + aircraftModelList.get(i).getAircraftId() + "  " +
+                +deleteList.get(i).getAircraftPosition());
+            }
+
+            aircraftDataAccessorService.delete(deleteList);
+            return new ResponseEntity<List<AircraftModel>>(deleteList, HttpStatus.OK);
         }
     }
 

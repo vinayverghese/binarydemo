@@ -21,9 +21,16 @@ public class AircraftDataAccessorService {
     @Autowired
     private AircraftRepository aircraftRepository;
 
+
+
     public void save(List<AircraftModel> aircraftModelList) {
         System.out.println("Saving " +aircraftModelList.size());
         aircraftRepository.saveAll(aircraftModelList);
+    }
+
+    public void delete(List<AircraftModel> aircraftModelList) {
+        System.out.println("Deleting " +aircraftModelList.size());
+        aircraftRepository.deleteAll(aircraftModelList);
     }
 
     public List<AircraftModel> findAllAircraftsInQueue() {
