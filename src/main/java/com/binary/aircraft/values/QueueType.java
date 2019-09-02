@@ -18,7 +18,7 @@ public enum QueueType {
     public static String getNameByAbbr(String abbr){
         if(StringUtils.isNotBlank(abbr)) {
             for (QueueType q : QueueType.values()) {
-                if (abbr.equals(q.getAbbr())) return q.getAbbr();
+                if (abbr.equals(q.getAbbr())) return q.name();
             }
         }
         return null;

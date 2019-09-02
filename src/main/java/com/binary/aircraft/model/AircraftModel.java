@@ -5,22 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @Setter
 @Entity
 @EqualsAndHashCode
 @Table(name="aircraft", schema="binary")
-public class AircraftModel implements Serializable {
+public class AircraftModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
 

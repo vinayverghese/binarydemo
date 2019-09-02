@@ -1,21 +1,15 @@
 package com.binary.aircraft.resource;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.binary.aircraft.model.AircraftModel;
-import com.binary.aircraft.request.QueueRequest;
-import org.springframework.web.bind.annotation.*;
-
-
 import com.binary.aircraft.request.EnqueueRequest;
+import com.binary.aircraft.request.QueueRequest;
 import com.binary.aircraft.service.AircraftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.PathParam;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AircraftQueueController {
@@ -36,7 +30,7 @@ public class AircraftQueueController {
 
     @RequestMapping(value = {"/dequeue", "/dequeue/{id}"}, method = RequestMethod.PUT)
     public ResponseEntity<List<AircraftModel>> dequeueAircraft(@PathVariable Optional<String> id) {
-        return aircraftService.deqeueAircraft(id);
+        return aircraftService.dequeueAircraft(id);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
