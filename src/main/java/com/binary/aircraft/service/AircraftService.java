@@ -1,7 +1,5 @@
 package com.binary.aircraft.service;
 
-import com.binary.aircraft.comparator.QueueSizeComparator;
-import com.binary.aircraft.comparator.QueueTimeComparator;
 import com.binary.aircraft.model.AircraftModel;
 import com.binary.aircraft.comparator.QueueComparator;
 import com.binary.aircraft.request.EnqueueRequest;
@@ -115,9 +113,6 @@ public class AircraftService {
             List<AircraftModel> aircraftModelList = aircraftDataAccessorService.findAllAircraftsInQueue();
 
             QueueComparator queueComparator = new QueueComparator();
-            //QueueSizeComparator queueSizeComparator = new QueueSizeComparator();
-            //QueueTimeComparator queueTimeComparator = new QueueTimeComparator();
-
             Collections.sort(aircraftModelList, queueComparator);
 
             for (AircraftModel aircraftModel : aircraftModelList)
