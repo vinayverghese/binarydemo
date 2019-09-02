@@ -2,6 +2,8 @@
 
 Problem Statement -> [View](/resources/Exercise.txt)
 
+Postman Collection -> [View](resources/binarydemo.postman_collection.json)
+
 Database Script-> [View](resources/script.sql)
 
 **Database Details**
