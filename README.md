@@ -22,7 +22,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
    enqueueSize = L (Large), S (Small)
    position = Position in Queue
    
-  **_Request:_** `PUT http://localhost:9091/binary/updatequeue`
+  **_Request_** `PUT http://localhost:9091/binary/updatequeue`
    
    **_Body_**
    
