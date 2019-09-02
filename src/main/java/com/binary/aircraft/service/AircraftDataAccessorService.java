@@ -2,6 +2,7 @@ package com.binary.aircraft.service;
 
 import com.binary.aircraft.model.AircraftModel;
 import com.binary.aircraft.repository.AircraftRepository;
+import com.binary.aircraft.request.EnqueueRequest;
 import com.binary.aircraft.request.QueueRequest;
 import com.binary.aircraft.values.QueueSize;
 import com.binary.aircraft.values.QueueType;
@@ -27,6 +28,11 @@ public class AircraftDataAccessorService {
     public List<AircraftModel> findAllAircraftsInQueue() {
         return (List<AircraftModel>) aircraftRepository.findAll();
     }
+
+    public AircraftModel findAircraftsByPosition(EnqueueRequest enqueueRequest) {
+        return (AircraftModel) aircraftRepository.findByAircraftPosition(enqueueRequest.getPosition());
+    }
+
 
     public List<AircraftModel> findAircraftsByAircraftIdOrQueueTypeOrQueueSize(QueueRequest queueRequest) {
 

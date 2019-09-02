@@ -60,5 +60,43 @@ public class AircraftService {
         }
 
     }
+
+    public ResponseEntity<String> updateAircraft(EnqueueRequest enqueueRequest) {
+
+        //Search for position 4, find AircraftModel(4).
+        // Update AircraftModel with enqueueRequest(5).
+        //New AircraftModel will be updated as AircraftModel(4)
+        // 1 Update(5) and 1 Insertion(4)
+
+        if (enqueueRequest.getPosition() != null) {
+
+            Integer position = enqueueRequest.getPosition();
+
+
+            AircraftModel aircraftModel = aircraftDataAccessorService.findAircraftsByPosition(enqueueRequest);
+            AircraftModel newAircraftModel = new AircraftModel();
+            List<AircraftModel> updatedAircraftModelList = new ArrayList<>();
+
+            if (aircraftModel != null) {
+                System.out.println("Updating queue  position  (+1) : "  +position);
+                aircraftModel.setAircraftPosition(position+1);
+                updatedAircraftModelList.add(aircraftModel);
+            }
+
+
+            newAircraftModel.setAircraftType(QueueType.getNameByAbbr(enqueueRequest.getEnqueueType()));
+            newAircraftModel.setAircraftSize(QueueSize.getNameByAbbr(enqueueRequest.getEnqueueSize()));
+            newAircraftModel.setAircraftStatus("A");
+            updatedAircraftModelList.add(newAircraftModel);
+
+            aircraftDataAccessorService.save(updatedAircraftModelList);
+            return new ResponseEntity<>("Updated Aircraft Queue", HttpStatus.CREATED);
+
+
+        } else {
+            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }
 

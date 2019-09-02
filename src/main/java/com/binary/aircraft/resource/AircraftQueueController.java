@@ -24,6 +24,11 @@ public class AircraftQueueController {
       return  aircraftService.enqueueAircraft(enqueueRequest);
     }
 
+    @RequestMapping(value = "/updatequeue", method = RequestMethod.PUT)
+    public ResponseEntity<String> updateAircraft(@RequestBody EnqueueRequest enqueueRequest) {
+        return  aircraftService.updateAircraft(enqueueRequest);
+    }
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<AircraftModel>> listAircraftQueue(QueueRequest queueRequestList) {
         return  aircraftService.listAircraftQueue(queueRequestList);

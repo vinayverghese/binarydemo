@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,11 @@ public class AircraftModel implements Serializable {
     private Integer aircraftPosition;
 
     @CreationTimestamp
-    @Column(name="aircraft_timestamp")
-    private LocalDateTime aircraftTimeStamp;
+    @Column(name="aircraft_creation_timestamp")
+    private LocalDateTime creationTime;
+
+    @UpdateTimestamp
+    @Column(name="aircraft_update_timestamp")
+    private LocalDateTime updateTime;
 
 }

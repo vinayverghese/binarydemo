@@ -11,10 +11,10 @@ import java.util.Optional;
 
 public interface AircraftRepository extends CrudRepository<AircraftModel, Integer> {
 
-    public List<AircraftModel> findByAircraftId(@Param("aircraft_id") Integer aircraftId);
+    public AircraftModel findByAircraftPosition(@Param("aircraftPosition") Integer aircraftPosition);
 
     //SELECT c FROM Customer c WHERE (:name is null or c.name = :name)
-    @Query("SELECT a FROM AircraftModel a WHERE (:aircraftId IS NULL OR a.aircraftId = :aircraftId) AND (:aircraftType IS NULL OR a.aircraftType = :aircraftType) AND (:aircraftSize IS NULL OR a.aircraftSize = :aircraftSize)")
+    @Query("SELECT a FROM AircraftModel a WHERE (:aircraftId IS NULL OR a.aircraftId = :aircraftId) AND (:aircraftType IS NULL OR a.aircraftType = :aircraftType) AND (:aircraftSize IS NULL OR a.aircraftSize = :aircraftSize) ORDER BY aircraftPosition")
     public List<AircraftModel> findByAircraftIdOrQueueTypeOrQueueSize(
             @Param("aircraftId") Integer aircraftId,
             @Param("aircraftType") String aircraftType,
