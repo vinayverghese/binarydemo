@@ -18,6 +18,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
   - **Add to Queue:**
   
     To add to queue, pass AC with parameters based on:
+     
      enqueueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
      enqueueSize = L (Large), S (Small)
      position = Position in Queue
@@ -45,6 +46,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
    - **State of Queue:**
 
       To view state of queue, based on following parameters:
+      
       aircraftId (Id of AC in Queue)
       queueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
       queueSize = L (Large), S (Small)
