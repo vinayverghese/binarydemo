@@ -80,6 +80,44 @@
 			"response": []
 		},
 		{
+			"name": "Dequeue",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9091/binary/dequeue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"binary",
+						"dequeue"
+					]
+				},
+				"description": "http://localhost:9091/aircract/enqueue"
+			},
+			"response": []
+		},
+		{
 			"name": "List",
 			"request": {
 				"method": "GET",
