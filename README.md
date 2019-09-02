@@ -22,14 +22,15 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
      enqueueSize = L (Large), S (Small)
      position = Position in Queue
    
-   **_Request_** `PUT http://localhost:9091/binary/updatequeue`
-    **_Body_**
-    
-     {
-         "enqueueType": "E",
-         "enqueueSize": "S",
-         "position" : 9
-     }
+     **_Request_** `PUT http://localhost:9091/binary/updatequeue`
+
+     **_Body_**
+
+       {
+           "enqueueType": "E",
+           "enqueueSize": "S",
+           "position" : 9
+       }
     
   - **Remove from Queue:**
    
@@ -42,10 +43,10 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
       **_Request_** `PUT http://localhost:9091/binary/dequeue/{number}`
  
    - **State of Queue:**
-   
-    To view state of queue, based on following parameters:
-    aircraftId (Id of AC in Queue)
-    queueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
-    queueSize = L (Large), S (Small)
 
-    **_Request_** `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
+      To view state of queue, based on following parameters:
+      aircraftId (Id of AC in Queue)
+      queueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
+      queueSize = L (Large), S (Small)
+
+      **_Request_** `GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1`
