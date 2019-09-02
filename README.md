@@ -25,13 +25,13 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
      **_Request_** `PUT http://localhost:9091/binary/updatequeue`
 
      **_Body_**
-
+       ```   
        {
            "enqueueType": "E",
            "enqueueSize": "S",
            "position" : 9
        }
-    
+      ```
   - **Remove from Queue:**
    
       To view ACs in Queue, pass without parameter
