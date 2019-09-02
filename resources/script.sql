@@ -5,8 +5,7 @@ CREATE TABLE `aircraft` (
  `aircraft_creation_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  `aircraft_update_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
  `aircraft_status` varchar(2) DEFAULT NULL,
- `aircraft_position` int(20) DEFAULT NULL,
+ `aircraft_position` int(20) NOT NULL,
  PRIMARY KEY (`aircraft_id`),
- UNIQUE KEY `aircraft_id_UNIQUE` (`aircraft_id`),
- UNIQUE KEY `aircraft_position` (`aircraft_position`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
+ UNIQUE KEY `aircraft_id_UNIQUE` (`aircraft_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8
