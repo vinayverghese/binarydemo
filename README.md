@@ -26,6 +26,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
     }
     ```
    **Request**
+  
     ```
     GET http://localhost:9091/binary/list?queueType=V&queueSize=S&aircraftId=1
     ```
