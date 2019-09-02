@@ -1,9 +1,12 @@
-CREATE TABLE `binary`.`aircraft` (
-  `aircraft_id` INT(20) NOT NULL AUTO_INCREMENT,
-  `aircraft_type` VARCHAR(45) NOT NULL,
-  `aircraft_size` VARCHAR(2) NOT NULL,
-  `aircraft_timestamp` TIMESTAMP NOT NULL,
-  `aircraft_status` VARCHAR(2) NULL,
-  `aircraft_position` INT(20) NULL,
-  PRIMARY KEY (`aircraft_id`),
-  UNIQUE INDEX `aircraft_id_UNIQUE` (`aircraft_id` ASC));
+CREATE TABLE `aircraft` (
+ `aircraft_id` int(20) NOT NULL AUTO_INCREMENT,
+ `aircraft_type` varchar(45) NOT NULL,
+ `aircraft_size` varchar(45) NOT NULL,
+ `aircraft_creation_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ `aircraft_update_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+ `aircraft_status` varchar(2) DEFAULT NULL,
+ `aircraft_position` int(20) DEFAULT NULL,
+ PRIMARY KEY (`aircraft_id`),
+ UNIQUE KEY `aircraft_id_UNIQUE` (`aircraft_id`),
+ UNIQUE KEY `aircraft_position` (`aircraft_position`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
