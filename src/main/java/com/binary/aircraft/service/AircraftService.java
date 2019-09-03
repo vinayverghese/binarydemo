@@ -103,6 +103,7 @@ public class AircraftService {
                     addNewAircraftToPosition.setAircraftType(QueueType.getNameByAbbr(enqueueRequest.getEnqueueType()));
                     addNewAircraftToPosition.setAircraftSize(QueueSize.getNameByAbbr(enqueueRequest.getEnqueueSize()));
                     addNewAircraftToPosition.setAircraftPosition(position);
+                    addNewAircraftToPosition.setAircraftStatus("A");
                     addNewAircraftToPosition.setAircraftId(null);
 
                     updateOldAircraftList.add(addNewAircraftToPosition);
