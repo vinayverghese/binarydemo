@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AircraftService {
@@ -133,15 +132,12 @@ public class AircraftService {
 
                 aircraftDataAccessorService.save(updatedAircraftModelList);
             }
-
-            //aircraftDataAccessorService.save(updatedAircraftModelList);
             return new ResponseEntity<>("Updated Aircraft Queue", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>("Invalid Type/Size", HttpStatus.BAD_REQUEST);
         }
 
     }
-
 
     public ResponseEntity<List<AircraftModel>> dequeueAircraft(Optional<String> id) {
 
