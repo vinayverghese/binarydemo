@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS `binary`
+
 CREATE TABLE `aircraft` (
  `aircraft_id` int(20) NOT NULL AUTO_INCREMENT,
  `aircraft_type` varchar(45) NOT NULL,
