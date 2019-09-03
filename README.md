@@ -17,7 +17,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 
   - **Add to Queue:**
   
-    To add to queue, pass AC with parameters based on:
+    To add an AC to queue, call request with following parameters in the body based on:
      
      enqueueType = E (Emergency), V (VIP), P (Passenger), C (Cargo)
      
@@ -37,17 +37,17 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
       ```
   - **Remove from Queue:**
    
-      To view ACs in Queue, pass without parameter
+      To view ACs in Queue, call below request without any parameter
 
      **_Request_** `PUT http://localhost:9091/binary/dequeue`
 
-      To dequeue ACs based on precedence, pass number of ACs (number=1,2,..) to be dequeued as path parameter
+      To dequeue ACs based on precedence, call request with number of ACs (number=1,2,..) to be dequeued as path parameter
 
       **_Request_** `PUT http://localhost:9091/binary/dequeue/{number}`
  
    - **State of Queue:**
 
-      To view state of queue, based on following parameters:
+      To view state of queue, call request based on following query parameters:
       
       aircraftId (Id of AC in Queue)
       
