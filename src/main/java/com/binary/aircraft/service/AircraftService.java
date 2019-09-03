@@ -147,7 +147,9 @@ public class AircraftService {
 
         if (!id.isPresent()) {
 
-            List<AircraftModel> aircraftModelList = aircraftDataAccessorService.findAllAircraftsInQueue();
+
+            List<AircraftModel> readLists = aircraftDataAccessorService.findAllAircraftsInQueue();
+            List<AircraftModel> aircraftModelList = Collections.synchronizedList(readLists);
 
             QueueComparator queueComparator = new QueueComparator();
             Collections.sort(aircraftModelList, queueComparator);
