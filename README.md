@@ -6,6 +6,15 @@ Postman Collection -> [View](resources/binarydemo.postman_collection.json)
 
 Database Script-> [View](resources/script.sql)
 
+## Server Details
+
+In order to define hostname and port, following properties are required (Port can be changed)
+
+```
+server.servlet.contextPath=/binary
+server.port=9091
+```
+
 ## Database Details
 ```
 spring.datasource.url=jdbc:mysql://localhost:8889/binary
