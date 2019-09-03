@@ -17,10 +17,6 @@ public class AircraftQueueController {
     @Autowired
     private AircraftService aircraftService;
 
-    @RequestMapping(value = "/enqueue", method = RequestMethod.POST)
-    public ResponseEntity<String> enqueueAircraft(@RequestBody List<EnqueueRequest> enqueueRequest) {
-        return aircraftService.enqueueAircraft(enqueueRequest);
-    }
 
     @RequestMapping(value = "/updatequeue", method = RequestMethod.PUT)
     public ResponseEntity<String> updateAircraft(@RequestBody EnqueueRequest enqueueRequest) {

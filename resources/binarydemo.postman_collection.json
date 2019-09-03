@@ -6,43 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Enqueue",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"enqueueType\": \"E\",\n        \"enqueueSize\": \"L\"\n    },\n    {\n        \"enqueueType\": \"V\",\n        \"enqueueSize\": \"S\"\n    }\n]"
-				},
-				"url": {
-					"raw": "http://localhost:9091/binary/enqueue",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9091",
-					"path": [
-						"binary",
-						"enqueue"
-					]
-				},
-				"description": "http://localhost:9091/aircract/enqueue"
-			},
-			"response": []
-		},
-		{
 			"name": "Enqueue Or Update",
 			"request": {
 				"method": "PUT",
@@ -102,7 +65,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:9091/binary/dequeue",
+					"raw": "http://localhost:9091/binary/dequeue/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -110,7 +73,8 @@
 					"port": "9091",
 					"path": [
 						"binary",
-						"dequeue"
+						"dequeue",
+						"3"
 					]
 				},
 				"description": "http://localhost:9091/aircract/enqueue"
@@ -135,7 +99,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:9091/binary/list?type=V&size=L&id=1",
+					"raw": "http://localhost:9091/binary/list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -147,16 +111,19 @@
 					],
 					"query": [
 						{
-							"key": "type",
-							"value": "V"
+							"key": "queueType",
+							"value": "V",
+							"disabled": true
 						},
 						{
-							"key": "size",
-							"value": "L"
+							"key": "queueSize",
+							"value": "S",
+							"disabled": true
 						},
 						{
-							"key": "id",
-							"value": "1"
+							"key": "aircraftId",
+							"value": "1",
+							"disabled": true
 						}
 					]
 				},

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,33 +21,6 @@ public class AircraftService {
 
     @Autowired
     private AircraftDataAccessorService aircraftDataAccessorService;
-
-    public ResponseEntity<String> enqueueAircraft(List<EnqueueRequest> enqueueRequestList) {
-
-        if (enqueueRequestList != null && !enqueueRequestList.isEmpty()) {
-
-            Integer size = enqueueRequestList.size();
-
-            if (validateInputTypeAndSizeList(enqueueRequestList)) {
-                List<AircraftModel> aircraftModelList = new ArrayList<>();
-                for (EnqueueRequest e : enqueueRequestList) {
-
-                    AircraftModel aircraftModel = new AircraftModel();
-                    aircraftModel.setAircraftType(QueueType.getNameByAbbr(e.getEnqueueType()));
-                    aircraftModel.setAircraftSize(QueueSize.getNameByAbbr(e.getEnqueueSize()));
-                    aircraftModel.setAircraftStatus("A");
-                    aircraftModelList.add(aircraftModel);
-                }
-                aircraftDataAccessorService.save(aircraftModelList);
-            } else {
-                return new ResponseEntity<>("Wrong input", HttpStatus.BAD_REQUEST);
-            }
-            return new ResponseEntity<>(size + " ACs added to Queue", HttpStatus.CREATED);
-
-        } else {
-            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
-        }
-    }
 
     public ResponseEntity<List<AircraftModel>> listAircraftQueue(QueueRequest queueRequest) {
         if (queueRequest != null) {
@@ -71,9 +45,8 @@ public class AircraftService {
                 Integer position = enqueueRequest.getPosition();
                 Integer maxPosition = aircraftDataAccessorService.findMaxAircraftPosition();
 
-                if(position>maxPosition)
-                {
-                    position=maxPosition+1;
+                if (position > maxPosition) {
+                    position = maxPosition + 1;
                 }
                 List<AircraftModel> updateOldAircraftList = aircraftDataAccessorService.findAllAircraftsInQueue();
                 AircraftModel addNewAircraftToPosition = new AircraftModel();
@@ -81,9 +54,9 @@ public class AircraftService {
                 if (updateOldAircraftList != null) {
 
                     for (AircraftModel updateOldAircraftModel : updateOldAircraftList) {
-                        if(updateOldAircraftModel.getAircraftPosition().equals(position)) {
+                        if (updateOldAircraftModel.getAircraftPosition().equals(position)) {
                             addNewAircraftToPosition = copyAicraftModel(updateOldAircraftModel);
-                    }
+                        }
                     }
                     for (AircraftModel updateOldAircraftModel : updateOldAircraftList) {
                         if (updateOldAircraftModel.getAircraftPosition() >= position) {
@@ -92,7 +65,7 @@ public class AircraftService {
                     }
                     System.out.println("\nOld Entry :");
 
-                    System.out.println("\nPosition: " + addNewAircraftToPosition.getAircraftPosition() + "  _____  Id )  " + addNewAircraftToPosition.getAircraftId() +  " ___"+
+                    System.out.println("\nPosition: " + addNewAircraftToPosition.getAircraftPosition() + "  _____  Id )  " + addNewAircraftToPosition.getAircraftId() + " ___" +
                             "Type: " + addNewAircraftToPosition.getAircraftType() + ", Size: " +
                             addNewAircraftToPosition.getAircraftSize());
                     System.out.println("\n_____\n");
@@ -108,9 +81,9 @@ public class AircraftService {
 
                     updateOldAircraftList.add(addNewAircraftToPosition);
                     for (AircraftModel aircraftModel : updateOldAircraftList) {
-                        System.out.println("\n Position: " + aircraftModel.getAircraftPosition() + "  _____  Id )  " + aircraftModel.getAircraftId() +  " ___"+
-                        "Type: " + aircraftModel.getAircraftType() + ", Size: " +
-                        aircraftModel.getAircraftSize());
+                        System.out.println("\n Position: " + aircraftModel.getAircraftPosition() + "  _____  Id )  " + aircraftModel.getAircraftId() + " ___" +
+                                "Type: " + aircraftModel.getAircraftType() + ", Size: " +
+                                aircraftModel.getAircraftSize());
                     }
                     aircraftDataAccessorService.save(updateOldAircraftList);
 
@@ -204,19 +177,13 @@ public class AircraftService {
         }
     }
 
-    private Boolean validateInputTypeAndSizeList(List<EnqueueRequest> enqueueRequestList) {
-        return enqueueRequestList.stream().allMatch(e -> QueueSize.contains(e.getEnqueueSize())
-                && QueueType.contains(e.getEnqueueType()));
-    }
-
     private Boolean validateInputTypeAndSize(EnqueueRequest enqueueRequest) {
         return QueueType.contains(enqueueRequest.getEnqueueType()) && QueueSize.contains(enqueueRequest.getEnqueueSize());
 
     }
 
-    private AircraftModel copyAicraftModel (AircraftModel aircraftModel){
+    private AircraftModel copyAicraftModel(AircraftModel aircraftModel) {
         AircraftModel a = new AircraftModel();
-
         a.setAircraftId(aircraftModel.getAircraftId());
         a.setAircraftPosition(aircraftModel.getAircraftPosition());
         a.setAircraftStatus(aircraftModel.getAircraftStatus());
@@ -224,7 +191,6 @@ public class AircraftService {
         a.setAircraftSize(aircraftModel.getAircraftSize());
         a.setCreationTime(aircraftModel.getCreationTime());
         a.setUpdateTime(aircraftModel.getUpdateTime());
-
         return a;
     }
 }
